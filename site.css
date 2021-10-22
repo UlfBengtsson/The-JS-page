@@ -1,9 +1,16 @@
 .box {
     width: 50px;
     height: 50px;
-    background-color: white;
     border: 2px solid black;
     float: left;
+}
+
+.boxBlack {
+    background-color: black;
+}
+
+.boxWhite {
+    background-color: white;
 }
 
 footer {
