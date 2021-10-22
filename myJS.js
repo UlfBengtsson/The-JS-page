@@ -23,24 +23,22 @@ function resetBoxContainerAndBoxCounter() {
 }
 
 function makeBox(boxColor) {
-    console.log("makeBox stated");
 
     let myBox = document.createElement("div");
     myBox.id = 'box' + ++boxCounter;
     myBox.className = "box";//edit class'es on the element as if it was a string, so here it will replace the old string with a new one.
     myBox.classList.add(boxColor);
 
-    if (ticTacToeGameActive) {
-        myBox.addEventListener('click', function (event) {
-            console.log(event);
-            let playerSymbol = '<h1>' + (playerX_Turn ? "X" : "O") + '</h1>';
-            event.target.innerHTML = playerSymbol;
-            playerX_Turn = !playerX_Turn;
-        })
-    }
-
     boxContainer.appendChild(myBox);
-    console.log("Box added", myBox);
+
+    return myBox;
+}
+
+function placeMaker(boxId) {
+    console.log(boxId);
+    let playerSymbol = '<h1>' + (playerX_Turn ? "X" : "O") + '</h1>';
+    document.getElementById(boxId).innerHTML = playerSymbol;
+    playerX_Turn = !playerX_Turn;
 }
 
 function createTicTacToe() {
@@ -61,16 +59,16 @@ function createTicTacToe() {
     let toggleColor = false;
 
     for (let index = 0; index < 9; index++) {
-
+        let myBox;
         if (toggleColor) {
-            makeBox("boxWhite");
+            myBox = makeBox("boxWhite");
         }
         else {
-            makeBox("boxBlack");
+            myBox = makeBox("boxBlack");
         }
         toggleColor = !toggleColor;
+        myBox.addEventListener('click', () => placeMaker(myBox.id));
     }
-
 }
 
 //makeBox();
